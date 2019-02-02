@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- 	<typeAliases>
+		<typeAlias type="" alias="" />
+	</typeAliases> -->
+<!-- 	<plugins> -->
+<!-- 	<plugin interceptor="com.cmos.core.logger.interceptor.DaoLoggerInterceptor"/> -->
+<!-- 	</plugins> -->
+
+
+	<!-- <environments default="development">
+		<environment id="development">
+		配置事务管理和数据源
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/test" />
+				<property name="username" value="root" />
+				<property name="password" value="" />
+			</dataSource>
+		</environment>
+	</environments> -->
+	
+	<!-- 配置映射文件 -->
+    <mappers>
+		<mapper resource="orm/businessEntity.xml" />
+<!-- 		<package name="com.cmos.ngbusicore.dao.businessScenario"/> -->
+    </mappers>
+</configuration>

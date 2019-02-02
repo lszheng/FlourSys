@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd.dtd">
+<mapper namespace="com.module1.service.impl.ProdServiceImpl">
+
+	<select id="queryCount" resultType="Integer">
+		select count(*) from
+		t_sales_dtl
+	</select>
+
+	<insert id="insertProduct">
+		insert into t_sales_dtl
+		(id,
+		customer,
+		salesname,
+		materielname,
+		datetime,
+		simpleprice,
+		ton,
+		freight,
+		totalfreight,
+		totalprice)
+		values
+		<foreach collection="listProd" item="product" separator=",">
+			(
+			#{product.id},
+			#{product.customer},
+			#{product.salesname},
+			#{product.materielName},
+			#{product.dateTime},
+			#{product.simplePrice},
+			#{product.ton},
+			#{product.freight},
+			#{product.totalFreight},
+			#{product.totalPrice}
+			)
+		</foreach>
+	</insert>
+
+	<select id="queryProdList" resultType="com.module1.bean.SalesDtlBean">
+		select customer,
+		salesname,
+		materielname,
+		datetime,
+		simpleprice,
+		ton,
+		freight,
+		totalfreight,
+		totalprice
+		from t_sales_dtl
+		where 1 = 1
+		and salesname = #{salesname}
+		and materielname = #{materiel}
+	</select>
+
+	<select id="queryManList" resultType="String">
+		select distinct(salesname)
+		from t_sales_dtl
+	</select>
+
+	<select id="queryMaterieList" resultType="String">
+		select
+		distinct(materielname) from t_sales_dtl where salesname= #{salesname}
+	</select>
+
+	<update id="deleteTotal">
+		truncate table t_sales_dtl
+	</update>
+
+	<select id="queryMaterielTotalBySalesName" resultType="java.util.HashMap">
+		SELECT materielname, SUM(ton) as tontotal,(SUM(totalprice)-SUM(totalfreight))/SUM(ton) AS avgprice FROM t_sales_dtl WHERE salesname=#{salesname} GROUP
+		BY materielname;
+	</select>
+</mapper>

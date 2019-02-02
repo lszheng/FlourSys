@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- <bean class="com.cmos.ngbusicore.util.PropertyConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config/jdbc.properties</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
+		<property name="url" value="jdbc:mysql://localhost:3306/gbdb" />  
+		<property name="username" value="root" />  
+		<property name="password" value="root" />  
+		<property name="filters" value="stat" />  
+		<property name="initialSize" value="10" /> <!-- Initializing the number of connections -->
+		<property name="maxActive" value="50" />     <!-- The maximum number of concurrent connections -->
+		<property name="minIdle" value="5" />         <!-- The minimum number of idle connections -->
+		<property name="maxWait" value="60000" />  
+		<property name="timeBetweenEvictionRunsMillis" value="3000" />  
+		<property name="minEvictableIdleTimeMillis" value="300000" />  
+		<property name="validationQuery" value="SELECT 'x'" />  
+		<property name="testWhileIdle" value="true" />  
+		<property name="testOnBorrow" value="false" />  
+		<property name="testOnReturn" value="false" />  
+		<property name="poolPreparedStatements" value="true" />  
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />  
+	</bean>
+
+	<!-- SqlSession的工厂类 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:orm/Configuration.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- SqlSession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+</beans>
