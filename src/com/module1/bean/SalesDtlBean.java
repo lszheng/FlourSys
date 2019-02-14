@@ -111,7 +111,7 @@ public class SalesDtlBean {
 
 	@Override
 	public String toString() {
-		return "ProdBean [id=" + id + ", customer=" + customer + ", salesname=" + salesname + ", materielName="
+		return "SalesDtlBean [id=" + id + ", customer=" + customer + ", salesname=" + salesname + ", materielName="
 				+ materielName + ", dateTime=" + dateTime + ", simplePrice=" + simplePrice + ", ton=" + ton
 				+ ", freight=" + freight + ", totalFreight=" + totalFreight + ", totalPrice=" + totalPrice
 				+ ", averagePrice=" + averagePrice + "]";
