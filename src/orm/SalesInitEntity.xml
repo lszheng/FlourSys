@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd.dtd">
+<mapper namespace="SalesInitEntity">
+	<!--查询表数据总条数  -->
+	<select id="queryCount" resultType="Integer">
+		select count(cust_no) from
+		t_sales_init
+	</select>
+
+	<!-- 插入数据 -->
+	<insert id="insert">
+		insert into t_sales_init
+		(cust_no,cust_name,sales_name,materiel_no,meteriel_name,meteriel_unit,
+		sale_date,sale_simp_price,sales_volums,give_volums,back_volums,
+		back_give_volums,total_amt,remark1,remark2,remark3,remark4)
+		values
+		<foreach collection="SalesInitList" item="SalesInit" separator=",">
+			(
+			#{SalesInit.cust_no},
+			#{SalesInit.cust_name},
+			#{SalesInit.sales_name},
+			#{SalesInit.materiel_no},
+			#{SalesInit.meteriel_name},
+			#{SalesInit.meteriel_unit},
+			#{SalesInit.sale_date},
+			#{SalesInit.sale_simp_price},
+			#{SalesInit.sales_volums},
+			#{SalesInit.give_volums},
+			#{SalesInit.back_volums},
+			#{SalesInit.back_give_volums},#{SalesInit.total_amt},#{SalesInit.remark1},#{SalesInit.remark2},
+			#{SalesInit.remark3},#{SalesInit.remark4}
+			)
+		</foreach>
+	</insert>
+	
+	<!-- 删除表中全部数据 -->
+	<update id="delete">
+		truncate table t_sales_init
+	</update>
+
+	<!-- 按业务员名称和物料名称查询 -->
+	<select id="querySalesInitList" resultType="com.module1.bean.SalesInitBean">
+		select cust_no,cust_name,sales_name,materiel_no,meteriel_name,meteriel_unit,
+		sale_date,sale_simp_price,sales_volums,give_volums,back_volums,back_give_volums,
+		total_amt,remark1,remark2,remark3,remark4
+		from t_sales_init
+		where 1 = 1
+		and sales_name = #{sales_name}
+		and meteriel_name = #{meteriel_name}
+	</select>
+
+</mapper>

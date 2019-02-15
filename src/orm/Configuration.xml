@@ -27,6 +27,6 @@
 	<!-- 配置映射文件 -->
     <mappers>
 		<mapper resource="orm/businessEntity.xml" />
-<!-- 		<package name="com.cmos.ngbusicore.dao.businessScenario"/> -->
+		<mapper resource="orm/SalesInitEntity.xml" />
     </mappers>
 </configuration>
