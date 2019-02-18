@@ -1,6 +1,7 @@
 package com.module1.util;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,4 +40,27 @@ public class Utils {
 		}
 		return "";
 	}
+    /**
+     * String转Date类型
+     * @param date
+     * @param pattern
+     * @return
+     */
+    public static Date formatDate(String date, String pattern){
+    	SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+    	try {
+			return sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
+    public static Double formatDouble(String number){
+    	try {
+			return Double.parseDouble(number);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+    }
 }
