@@ -1,10 +1,8 @@
 package com.module1.service;
 
 import java.io.File;
-
-import javax.servlet.ServletOutputStream;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import java.util.List;
+import java.util.Map;
 
 public interface SalesInitService {
 	
@@ -16,4 +14,5 @@ public interface SalesInitService {
 	
 	public void delete();
 */
+	public List queryInitData(Map param);
 }

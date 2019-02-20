@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -83,6 +85,7 @@ public class SalesInitController {
 					}else{
 						mav.addObject("retcode", "-1");
 						mav.addObject("retMsg", "上传失败");
+						System.out.println("上传失败!");
 					}
 					
 				}
@@ -91,7 +94,25 @@ public class SalesInitController {
 
 		}
 		mav.setViewName("/index");
-
+		return mav;
+	}
+	
+	@RequestMapping("/query.do")
+	public ModelAndView query(HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
+		System.out.println("查询");
+		ModelAndView mav = new ModelAndView();
+		//获取参数
+		Map param = new HashMap();
+		String sales_name = request.getParameter("sales_name");
+		param.put("sales_name", sales_name);
+		System.out.println(sales_name);
+		//调用服务
+		List retList= salesInitService.queryInitData(param);
+		//返回
+		
+		mav.addObject("retList", retList);
+		
+		mav.setViewName("/index");
 		return mav;
 	}
 	

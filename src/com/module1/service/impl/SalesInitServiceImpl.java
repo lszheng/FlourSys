@@ -31,7 +31,17 @@ public class SalesInitServiceImpl implements SalesInitService {
 		try {
 			// 读取文件
 			List<String[]> list = XLSXCovertCSVReader.readerExcel(file.getPath(), "初始数据源", 17);
+			int i=0;
 			for (String[] record : list) {
+				//第一行数据是表头，不要
+				if(i==0){
+					i++;
+					continue;
+				}
+				i++;
+				System.out.println(i);
+				System.out.println(record.toString());
+				
 				SalesInitBean sib = new SalesInitBean();
 				sib.setCust_no(record[0]);
 				sib.setCust_name(record[1]);
@@ -40,12 +50,19 @@ public class SalesInitServiceImpl implements SalesInitService {
 				sib.setMeteriel_name(record[4]);
 				sib.setMeteriel_unit(record[5]);
 				
-				sib.setSale_date(Utils.formatDate(record[6], "yyyy/m/dd"));
+				sib.setSale_date(record[6]);
+				/*
 				sib.setSale_simp_price(Utils.formatDouble(record[7]));
 				sib.setSales_volums(Utils.formatDouble(record[8]));
 				sib.setBack_volums(Utils.formatDouble(record[9]));
 				sib.setBack_give_volums(Utils.formatDouble(record[10]));
 				sib.setTotal_amt(Utils.formatDouble(record[11]));
+				*/
+				sib.setSale_simp_price(record[7]);
+				sib.setSales_volums(record[8]);
+				sib.setBack_volums(record[9]);
+				sib.setBack_give_volums(record[10]);
+				sib.setTotal_amt(record[11]);
 				sibList.add(sib);
 			}
 
@@ -56,10 +73,18 @@ public class SalesInitServiceImpl implements SalesInitService {
 			System.out.println("入库条数：" + count1);
 		} catch (Exception e) {
 			System.out.println("异常！！！:" + e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 
 		return true;
+	}
+
+	@Override
+	public List queryInitData(Map param) {
+		// TODO Auto-generated method stub
+		
+		return dao.queryForList("SalesInitEntity.querySalesInitList", param);
 	}
 
 }

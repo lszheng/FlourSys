@@ -12,9 +12,9 @@ public class Test1 {
 	
 	public static void main(String[] args) {
 		
-		String avgprice = "5080.6600224";
+		String avgprice = "0";
 		
-		BigDecimal avgBg = new BigDecimal(avgprice).setScale(2, RoundingMode.UP);
+		BigDecimal avgBg = new BigDecimal(avgprice).setScale(3, RoundingMode.UP);
 		System.out.println(avgBg.intValue());
 		System.out.println(avgBg.doubleValue());
 		
